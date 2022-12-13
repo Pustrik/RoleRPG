@@ -5,11 +5,8 @@
       "es6",
       "dom"
     ],
-    "rootDir": "/home/pustrik/RoleRPG/main",
-    "outDir": "./.ts-node",
     "module": "node16",
     "moduleResolution": "node",
-    "strict": true,
     "declaration": false,
     "sourceMap": true,
     "inlineSources": true,
@@ -23,18 +20,15 @@
     "inlineSourceMap": false,
     "noEmit": false
   },
-  "ts-node": {
-    "cwd": "/d/project",
-    "projectSearchDir": "/d/project",
-    "require": [],
-    "project": "/d/project/tsconfig.json"
-  },
   "files": [
     "index.ts",
-    "Warrior.ts",
-    "Mage.ts",
-    "Thief.ts",
-    "Character.ts",
-    "CreateCharacter.ts"
-    ]
+    "entityes/warrior.ts",
+    "entityes/mage.ts",
+    "entityes/thief.ts",
+    "entityes/character.ts",
+    "entityes/create_character.ts",
+    "app.ts",
+    "routes/auth.ts"
+  ],
+
 }
