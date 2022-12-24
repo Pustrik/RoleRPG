@@ -1,0 +1,1 @@
+{"version":3,"file":"i_user.js","sourceRoot":"","sources":["../../../../client/src/models/i_user.ts"],"names":[],"mappings":"","sourcesContent":["export interface IUser {\n    id: string,\n    username: string\n}"]}

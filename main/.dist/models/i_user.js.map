@@ -1,0 +1,1 @@
+{"version":3,"file":"i_user.js","sourceRoot":"","sources":["../../models/i_user.ts"],"names":[],"mappings":"","sourcesContent":["export interface IToken {\n    username: string,\n    password: string\n}"]}

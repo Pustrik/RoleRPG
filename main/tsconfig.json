@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "ES2017",
     "lib": [
-      "es6",
-      "dom"
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
+    "outDir": "./.dist",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "module": "node16",
     "moduleResolution": "node",
     "declaration": false,
@@ -16,19 +20,14 @@
     "stripInternal": true,
     "incremental": true,
     "skipLibCheck": true,
-    "importsNotUsedAsValues": "error",
     "inlineSourceMap": false,
-    "noEmit": false
+    "noEmit": false,
+    "jsx": "react"
   },
-  "files": [
-    "index.ts",
-    "entityes/warrior.ts",
-    "entityes/mage.ts",
-    "entityes/thief.ts",
-    "entityes/character.ts",
-    "entityes/create_character.ts",
-    "app.ts",
-    "routes/auth.ts"
+  "include": [
+    "**/*"
   ],
-
+  "exclude": [
+    "client"
+  ]
 }

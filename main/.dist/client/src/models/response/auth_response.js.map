@@ -1,0 +1,1 @@
+{"version":3,"file":"auth_response.js","sourceRoot":"","sources":["../../../../../client/src/models/response/auth_response.ts"],"names":[],"mappings":"","sourcesContent":["import {IUser} from \"../i_user\";\nexport interface AuthResponse {\n    access_token: string;\n    refresh_token: string;\n    user: IUser;\n}"]}
