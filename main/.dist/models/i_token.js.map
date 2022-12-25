@@ -1,1 +1,0 @@
-{"version":3,"file":"i_token.js","sourceRoot":"","sources":["../../models/i_token.ts"],"names":[],"mappings":"","sourcesContent":["export interface ITokenPair {\n    access_token: string,\n    refresh_token: string\n}"]}

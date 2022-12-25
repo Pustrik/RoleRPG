@@ -1,7 +1,7 @@
 import React, {FC, useContext, useState} from 'react';
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
-import {changeUserData} from "../../../services/user_service";
+import {changeUserData} from "../../../server/services/user_service";
 import {useNavigate} from "react-router";
 
 const ChangeUserDataForm: FC = () => {

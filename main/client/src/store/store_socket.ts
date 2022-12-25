@@ -1,26 +1,24 @@
 import {createContext} from 'react';
 import { Socket } from 'socket.io-client';
+import {IPlayer} from "../../../interfaces/I_player";
+import {IMessage} from "../../../interfaces/i_message";
 
-export interface IPlayer {
-    socket_id: string,
-    username: string,
-    hp: number,
-    statuses: Array<Number>
-}
 export interface ISocketContextState {
     socket: Socket | undefined;
     player: IPlayer,
     players: IPlayer[];
+    messages: IMessage[];
 }
 
 export const defaultSocketContextState: ISocketContextState = {
     socket: undefined,
     player: {} as IPlayer,
-    players: []
+    players: [],
+    messages: []
 };
 
-export type TSocketContextActions = 'update_socket' | 'update_players' | 'remove_player';
-export type TSocketContextPayload = string | string[] | Socket | IPlayer[] | IPlayer;
+export type TSocketContextActions = 'update_socket' | 'update_players' | 'remove_player' | 'update_player' | 'update_messages';
+export type TSocketContextPayload = string | string[] | Socket | IPlayer[] | IPlayer | IMessage[];
 
 export interface ISocketContextActions {
     type: TSocketContextActions;
@@ -33,10 +31,14 @@ export const SocketReducer = (state: ISocketContextState, action: ISocketContext
     switch (action.type) {
         case 'update_socket':
             return { ...state, socket: action.payload as Socket };
+        case 'update_player':
+            return { ...state, player: action.payload as IPlayer };
+        case 'update_messages':
+            return {...state, messages: action.payload as IMessage[] }
         case 'update_players':
             return { ...state, players: action.payload as IPlayer[] };
         case 'remove_player':
-            return { ...state, players: state.players.filter((uid) => uid.socket_id !== (action.payload as string)) };
+            return { ...state, players: state.players.filter((id) => id.socket_id !== (action.payload as string)) };
         default:
             return state;
     }

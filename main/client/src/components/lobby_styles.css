@@ -1,0 +1,25 @@
+.chat {
+    height: 100%;
+    width: 30%;
+    border: 3px solid #333333;
+    right: 0;
+    position: absolute;
+}
+.main {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+#root {
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    left: 0;
+}
+.message {
+    position: absolute;
+    width: 100%;
+    height: 5vh;
+    bottom: 0;
+}
