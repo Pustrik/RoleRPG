@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Store_http from "./store/store_http";
+import StoreHttp from "./store/store-http";
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import LobbyPage from "./components/lobby_page";
-import ChangeUserDataForm from "./components/change_form";
+import LobbyPage from "./components/lobby-page";
+import ChangeUserDataForm from "./components/change-form";
 interface State {
-    store: Store_http,
+    store: StoreHttp,
 }
-const store = new Store_http();
+const store = new StoreHttp();
 
 export const Context = createContext<State>({
     store,

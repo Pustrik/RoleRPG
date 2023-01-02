@@ -1,4 +1,4 @@
-import ApiError from "../exteptions/api_exceptions";
+import ApiError from "../exteptions/api-exceptions";
 
 function errorHandler(err, req, res, next) {
     if(err instanceof ApiError) {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AuthResponse} from "../models/response/auth_response";
+import {AuthResponse} from "../models/response/auth-response";
 export const API_URL = 'http://localhost:8080/rpg';
 const api = axios.create({
     withCredentials: true,

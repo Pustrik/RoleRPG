@@ -1,13 +1,13 @@
-import {http_server, ServerHttpStart} from "./http/http_server";
-import {ServerSocketStart} from "./socket/socket_server";
+import {httpServer, ServerHttpStart} from "./http/http-server";
+import ServerSocketStart from "./socket/socket-server";
 import dotenv from 'dotenv';
-import {gracefulShutdown} from "./utills/shutdown_utill";
+import gracefulShutdown from "./utills/shutdown-utill";
 dotenv.config();
 
 const start = async () => {
-    new ServerHttpStart(http_server, process.env.PORT);
-    new ServerSocketStart(http_server);
-    await gracefulShutdown(http_server);
+    new ServerHttpStart(httpServer, process.env.PORT);
+    new ServerSocketStart(httpServer);
+    await gracefulShutdown(httpServer);
 }
 
 start();

@@ -1,21 +1,21 @@
-import ApiError from "../exteptions/api_exceptions";
-import {validateAccessToken} from "../services/token_service";
+import ApiError from "../exteptions/api-exceptions";
+import {validateAccessToken} from "../services/token-service";
 
 function passport(req, res, next) {
     try {
-        const auth_header = req.headers.authorization;
-        if(!auth_header)
+        const authHeader = req.headers.authorization;
+        if(!authHeader)
             return next(ApiError.unauthorizedError());
 
-        const access_token = auth_header.split(' ')[1];
+        const access_token = authHeader.split(' ')[1];
         if(!access_token)
             return next(ApiError.unauthorizedError());
 
-        const user_data = validateAccessToken(access_token);
-        if(!user_data)
+        const userData = validateAccessToken(access_token);
+        if(!userData)
             return next(ApiError.unauthorizedError());
 
-        req.user = user_data;
+        req.user = userData;
         next();
     } catch (e) {
         return next(ApiError.unauthorizedError());

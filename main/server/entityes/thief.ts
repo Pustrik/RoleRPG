@@ -1,17 +1,17 @@
-import {damage_type, Character} from "./character";
+import {DamageType, Character} from "./character";
 
 export class Thief extends Character{
     protected class: string;
     protected hp: number;
     protected damage: number;
-    protected dmg_type: damage_type;
+    protected dmgType: DamageType;
 
     constructor() {
         super();
         this.class = "Thief";
         this.hp = 100;
         this.damage = 25;
-        this.dmg_type = damage_type.PHYSICAL;
+        this.dmgType = DamageType.PHYSICAL;
     }
     public getHp(): number {
         return this.hp;
@@ -19,7 +19,7 @@ export class Thief extends Character{
     public dealingDamage() {
         return {
             damage: this.damage,
-            dmg_type: this.dmg_type
+            dmg_type: this.dmgType
         };
     }
     public gettingDamage(damage: any, hp: number, statuses: number[]): number | boolean {
@@ -34,10 +34,10 @@ export class Thief extends Character{
             return this.getHp();
         return false;
     }
-    public useAbility(own_statuses: number[]): number[] | boolean {
-        if(own_statuses[0] != 0 || own_statuses[1] != 0)
+    public useAbility(ownStatuses: number[]): number[] | boolean {
+        if(ownStatuses[0] != 0 || ownStatuses[1] != 0)
             return false;
-        own_statuses[0] = 1;
-        return own_statuses;
+        ownStatuses[0] = 1;
+        return ownStatuses;
     }
 }

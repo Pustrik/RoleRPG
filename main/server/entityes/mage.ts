@@ -1,17 +1,17 @@
-import {damage_type, Character} from "./character";
+import {DamageType, Character} from "./character";
 
 export class Mage extends Character{
     protected class: string;
     protected hp: number;
     protected damage: number;
     protected ability: boolean;
-    protected dmg_type: damage_type;
+    protected dmgType: DamageType;
     constructor() {
         super();
         this.class = "Mage";
         this.hp = 80;
         this.damage = 100;
-        this.dmg_type = damage_type.MAGICAL;
+        this.dmgType = DamageType.MAGICAL;
     }
 
     public getHp(): number {
@@ -20,7 +20,7 @@ export class Mage extends Character{
     public dealingDamage() {
         return {
             damage: this.damage,
-            dmg_type: this.dmg_type
+            dmg_type: this.dmgType
         };
     }
     public gettingDamage(damage: any, hp: number): number | boolean {
@@ -33,10 +33,10 @@ export class Mage extends Character{
             return this.getHp();
         return false;
     }
-    public useAbility(own_statuses: number[], enemy_statuses: number[]): number[] | boolean {
-        if(own_statuses[1] != 0 || enemy_statuses[1] != 0)
+    public useAbility(ownStatuses: number[], enemyStatuses: number[]): number[] | boolean {
+        if(ownStatuses[1] != 0 || enemyStatuses[1] != 0)
             return false;
-        enemy_statuses[1] = 1;
-        return enemy_statuses;
+        enemyStatuses[1] = 1;
+        return enemyStatuses;
     }
 }

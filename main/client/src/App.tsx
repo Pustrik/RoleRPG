@@ -1,17 +1,13 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
-import LoginForm from "./components/login_form";
+import React, {useContext, useEffect, useState} from 'react';
+import LoginForm from "./components/login-form";
 import {observer} from "mobx-react-lite";
 import {Context} from "./index";
-import {IUser} from "./models/i_user";
-import UserService from "./services/user_service";
-import RegistrationForm from "./components/registration_form";
-import ChangeUserDataForm from "./components/change_form";
-import SocketIOClient from 'socket.io-client'
-import Lobby_page from "./components/lobby_page";
+import {IUser} from "./models/i-user";
+import RegistrationForm from "./components/registration-form";
 import {useNavigate} from "react-router";
-import Store_socket from "./store/store_socket";
+import StoreSocket from "./store/store-socket";
 const App = () => {
-    const {socket} = useContext(Store_socket).SocketState;
+    const {socket} = useContext(StoreSocket).SocketState;
 
     const {store} = useContext(Context);
     const [users, setUsers] = useState<IUser[]>([]);
@@ -23,14 +19,7 @@ const App = () => {
         if(localStorage.getItem('token'))
             store.checkAuth();
     }, []);
-    async function getUsers() {
-        try {
-            const response = await UserService.fetchUsers();
-            setUsers(response.data);
-        } catch (e) {
-            console.log(e);
-        }
-    }
+
     const navigate = useNavigate();
     if(store.is_loading) {
         return <div>Loading...</div>
@@ -52,14 +41,8 @@ const App = () => {
 
     return (
         <div>
-            <div>
-                <button onClick={() => getUsers()}>Пользователи</button>
-            </div>
             <h1>{store.is_auth ? `Пользователь фаторизован  ${store.user.username}` : `Авторизуйтесь`}</h1>
             <button onClick={() => store.logout()}>Выйти</button>
-            <div>
-                <button onClick={() => getUsers()}>Пользователи</button>
-            </div>
             {users.map(user =>
                 <div key={user.username}>{user.username}<button>Атака</button><button>Способность</button></div>
             )}
