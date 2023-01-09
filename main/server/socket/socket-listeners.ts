@@ -1,5 +1,5 @@
 import {Socket} from "socket.io";
-import IPlayer from "../../interfaces/I-player";
+import IPlayer from "../../interfaces/i-player";
 import IMessage from "../../interfaces/i-message";
 import * as callbacks from "../services/listeners-service";
 

@@ -2,7 +2,7 @@ import user_model from "../databases/mongo_db/models/user-model";
 import * as bcrypt from 'bcrypt';
 import {findToken, removeToken, userTokens, validateRefreshToken} from "./token-service";
 import ApiError from "../exteptions/api-exceptions";
-import {addUser, getUserById, updateUser} from "./pdb-service";
+import {addUser, getUserById, getUserByUsername, updateUser} from "./pdb-service";
 
 export async function registration(username: string, email: string, password: string, class_id: string) {
     const candidate = await user_model.findOne({username: username});
@@ -49,6 +49,9 @@ export async function changeUserData(id: string, username: string, password: str
     const isEqual = bcrypt.compareSync(password_old, user.password);
     if(!isEqual)
         throw ApiError.badRequest('Wrong password');
+    const isUnique = await getUserByUsername(username)
+    if(isUnique.id != id)
+        throw ApiError.badRequest('Wrong username');
     const hash = bcrypt.hashSync(password, 5);
     const user_pdb = await updateUser(id, username, hash, class_id);
     const user_mdb = await user_model.findById(id);

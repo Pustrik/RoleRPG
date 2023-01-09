@@ -1,4 +1,4 @@
-import IPlayer from '../../interfaces/I-player';
+import IPlayer from '../../interfaces/i-player';
 import IMessage from '../../interfaces/i-message';
 import {redisDB} from '../databases/redis_db/redis-db';
 import {getUserByUsername} from './pdb-service';

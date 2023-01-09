@@ -3,7 +3,7 @@ import {ISocketContextState, SocketReducer} from "../store/store-socket";
 import {Context} from "../index";
 import {useNavigate} from "react-router";
 import {useSocket} from "../hooks/use-socket";
-import IPlayer from "../../../interfaces/I-player";
+import IPlayer from "../../../interfaces/i-player";
 import './lobby-styles.css';
 import IMessage from "../../../interfaces/i-message";
 export interface IApplicationProps {}
@@ -185,21 +185,23 @@ const LobbyPage: React.FunctionComponent<IApplicationProps> = (props) => {
         return (
             <div>
                 <div className='main'>
-                <h2>Информация об игроке</h2>
-                <p>
-                    <br />
-                    Класс: <strong>{Class(SocketState.player.class_id)}</strong>
-                    <br />
-                    Здоровье: <strong>{SocketState.player.hp}</strong><button onClick={() => Revive()}>Воскреснуть</button>
-                    <br />
-                    Дебафы: <strong>{MageStatus(SocketState.player.statuses)}</strong>
-                    <br />
-                    <br />
-                    <strong>Игроки онлайн: </strong>
-                    {SocketState.players.filter((player) => SocketState.player.username !== player.username).map((player) => <li>{'Юзернейм: ' + player.username + ' Здоровье: ' + player.hp + ' Класс: ' + GetClass(player.class_id)}<button onClick={() => Attack(player.username)}>Удар</button><button onClick={() => UseSpellMage(player.username)}>Спел</button></li>)}
-                    <button onClick={Nav}>Назад</button>
-                    <br />
-                </p>
+                    <div id="inf">
+                        <h2>Информация об игроке</h2>
+                        <br />
+                        Класс: <strong>{Class(SocketState.player.class_id)}</strong>
+                        <br />
+                        Здоровье: <strong color="red">{SocketState.player.hp}</strong>
+                        <br />
+                        Дебафы: <strong>{MageStatus(SocketState.player.statuses)}</strong>
+                        <br />
+                    </div>
+                    <div id="mage">
+                    </div>
+                    <button className="lobbtn" onClick={Nav}>Назад</button>
+                    <button className="lobbtn" onClick={() => Revive()}>Воскреснуть</button>
+                </div>
+                <div id="players">
+                    {SocketState.players.filter((player) => SocketState.player.username !== player.username).map((player) => <li>{'Юзернейм: ' + player.username}<br/>{'Здоровье: ' + player.hp}<br/>{'Класс: ' + GetClass(player.class_id)}<br/><button onClick={() => Attack(player.username)}>Удар</button><button onClick={() => UseSpellMage(player.username)}>Спел</button><br/><br/></li>)}
                 </div>
                 <div className='chat'>
                     {SocketState.messages.map((message) => <li>{message.username + ': ' + message.message}</li>)}
@@ -210,48 +212,87 @@ const LobbyPage: React.FunctionComponent<IApplicationProps> = (props) => {
                             type={"text"}
                             placeholder={"message"}
                         />
-                        <button onClick={() => SendMessage(message, SocketState.player.username)}>Отправить</button>
+                        <button className="chatbtn" onClick={() => SendMessage(message, SocketState.player.username)}>Отправить</button>
                     </div>
                 </div>
             </div>
         );
-    else
+    else if(SocketState.player.class_id == 2)
         return (
             <div>
                 <div className='main'>
-                <h2>Информация об игроке</h2>
-                <p>
+                    <div id="inf">
+                        <h2>Информация об игроке</h2>
+                        <br />
+                        Класс: <strong>{Class(SocketState.player.class_id)}</strong>
+                        <br />
+                        Здоровье: <strong>{SocketState.player.hp}</strong>
+                        <br />
+                        Бафы: <strong>{ElseStatus(SocketState.player.statuses)}</strong>
+                        Дебафы: <strong>{MageStatus(SocketState.player.statuses)}</strong>
+                        <br />
+                    </div>
+                    <div id="thief">
+                    </div>
+                    <button className="lobbtn" onClick={Nav}>Назад</button>
+                    <button className="lobbtn" onClick={() => Revive()}>Воскреснуть</button>
+                    <button className="lobbtn" onClick={() => {UseSpell()}}>Способность</button>
+                </div>
+                <div id="players">
+                    {SocketState.players.filter((player) => SocketState.player.username !== player.username).map((player) => <li>{'Юзернейм: ' + player.username}<br/>{'Здоровье: ' + player.hp}<br/>{'Класс: ' + GetClass(player.class_id)}<br/><button onClick={() => Attack(player.username)}>Удар</button><br/><br/></li>)}
+                </div>
+                <div className='chat'>
+                    {SocketState.messages.map((message) => <li>{message.username + ': ' + message.message}</li>)}
+                    <div className='message'>
+                        <input
+                            onChange={e => setMessage(e.target.value)}
+                            value={message}
+                            type={"text"}
+                            placeholder={"message"}
+                        />
+                        <button className="chatbtn" onClick={() => SendMessage(message, SocketState.player.username)}>Отправить</button>
+                    </div>
+                </div>
+            </div>
+
+        );
+    return (
+        <div>
+            <div className='main'>
+                <div id="inf">
+                    <h2>Информация об игроке</h2>
                     <br />
                     Класс: <strong>{Class(SocketState.player.class_id)}</strong>
                     <br />
-                    Здоровье: <strong>{SocketState.player.hp}</strong><button onClick={() => Revive()}>Воскреснуть</button><button onClick={() => {UseSpell()}}>Способность</button>
+                    Здоровье: <strong>{SocketState.player.hp}</strong>
                     <br />
                     Бафы: <strong>{ElseStatus(SocketState.player.statuses)}</strong>
                     Дебафы: <strong>{MageStatus(SocketState.player.statuses)}</strong>
                     <br />
-                    <br />
-                    <strong>Игроки онлайн: </strong>
-                    {SocketState.players.filter((player) => SocketState.player.username !== player.username).map((player) => <li>{'Юзернейм: ' + player.username + ' Здоровье: ' + player.hp + ' Класс: ' + GetClass(player.class_id)}<button onClick={() => Attack(player.username)}>Удар</button></li>)}
-                    <button onClick={Nav}>Назад</button>
-                    <br />
-
-                </p>
                 </div>
-                <div className='chat'>
-                    {SocketState.messages.map((message) => <li>{message.username + ': ' + message.message}</li>)}
-                    <div className='message'>
-                        <input
-                            onChange={e => setMessage(e.target.value)}
-                            value={message}
-                            type={"text"}
-                            placeholder={"message"}
-                        />
-                        <button onClick={() => SendMessage(message, SocketState.player.username)}>Отправить</button>
+                    <div id="warrior">
                     </div>
+                    <button className="lobbtn" onClick={Nav}>Назад</button>
+                    <button className="lobbtn" onClick={() => Revive()}>Воскреснуть</button>
+                    <button className="lobbtn" onClick={() => {UseSpell()}}>Способность</button>
+            </div>
+            <div id="players">
+                {SocketState.players.filter((player) => SocketState.player.username !== player.username).map((player) => <li>{'Юзернейм: ' + player.username}<br/>{'Здоровье: ' + player.hp}<br/>{'Класс: ' + GetClass(player.class_id) }<br/><button onClick={() => Attack(player.username)}>Удар</button><br/><br/></li>)}
+            </div>
+            <div className='chat'>
+                {SocketState.messages.map((message) => <li>{message.username + ': ' + message.message}</li>)}
+                <div className='message'>
+                    <input
+                        onChange={e => setMessage(e.target.value)}
+                        value={message}
+                        type={"text"}
+                        placeholder={"message"}
+                    />
+                    <button className="chatbtn" onClick={() => SendMessage(message, SocketState.player.username)}>Отправить</button>
                 </div>
             </div>
-
-        );
+        </div>
+    );
 };
 
 export default LobbyPage;

@@ -1,6 +1,6 @@
 import {createContext} from 'react';
 import {Socket} from 'socket.io-client';
-import IPlayer from "../../../interfaces/I-player";
+import IPlayer from "../../../interfaces/i-player";
 import IMessage from "../../../interfaces/i-message";
 
 export interface ISocketContextState {

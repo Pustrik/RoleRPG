@@ -1,7 +1,7 @@
 import player_model from "../databases/mongo_db/models/player-model";
 import playersDto from "../dtos/player-dto";
 import {io} from "../socket/socket-server";
-import IPlayer from "../../interfaces/I-player";
+import IPlayer from "../../interfaces/i-player";
 
 export function sendMessage(name: string, users: string[], payload?: Object) {
     console.info('Emitting event: ' + name + ' to', users);

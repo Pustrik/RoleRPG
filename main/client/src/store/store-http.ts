@@ -1,7 +1,7 @@
 import {IUser} from "../models/i-user";
 import {makeAutoObservable} from "mobx";
 import AuthService from "../services/auth-service";
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
 import {AuthResponse} from "../models/response/auth-response";
 import {API_URL} from "../http";
 
@@ -9,8 +9,12 @@ export default class StoreHttp {
     user = {} as IUser;
     is_auth = false;
     is_loading = false;
+    class_id = 0;
     constructor() {
         makeAutoObservable(this);
+    }
+    setClassId(id: number) {
+        this.class_id = id;
     }
     setLoading(bool: boolean) {
         this.is_loading = bool;
@@ -28,6 +32,7 @@ export default class StoreHttp {
             console.log(response);
             this.setAuth(true);
             this.setUser(response.data.user);
+            this.setClassId(response.data.class_id as number);
         } catch (e: any) {
             console.log(e);
             alert(e.response.data.message)
@@ -39,6 +44,7 @@ export default class StoreHttp {
             const response = await AuthService.registration(username, email, password, password_d, class_id);
             localStorage.setItem('token', response.data.access_token);
             console.log(response);
+            this.setClassId(class_id);
             this.setAuth(true);
             this.setUser(response.data.user);
         } catch (e: any) {
@@ -54,6 +60,7 @@ export default class StoreHttp {
             console.log(response);
             this.setAuth(true);
             this.setUser(response.data.user);
+            alert('Поздравляю, теперь ты ' + response.data.user.username)
         } catch (e: any) {
             console.log(e);
             alert(e.response.data.message)
@@ -80,6 +87,7 @@ export default class StoreHttp {
             console.log(response);
             this.setAuth(true);
             this.setUser(response.data.user);
+            this.setClassId(response.data.class_id as number);
         } catch (e) {
             console.log(e);
         } finally {
