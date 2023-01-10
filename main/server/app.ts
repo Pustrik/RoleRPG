@@ -7,13 +7,15 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import errorHandler from './middleware/errorhandler';
 import {connectRedis} from "./databases/redis_db/redis-db";
-import {connectPostgre} from "./databases/postgre_db/postgre-db";
+import {connectPostgre, createTablesPDB} from "./databases/postgre_db/postgre-db";
 import connectMongo from "./databases/mongo_db/mongo-db";
+import createTables from "./databases/postgre_db/models/user-model";
 const app = express();
 dotenv.config();
 
 connectMongo();
 connectRedis();
+createTablesPDB();
 connectPostgre();
 
 app.use(body_parser.urlencoded({extended: true}));
