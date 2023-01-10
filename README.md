@@ -15,11 +15,8 @@
     <li>(1)Install Redis and Postgre DB`s</li>
     <li>Create new User in Postgre</li>
     <li>Create new Database</li>
-    <li>Create new Table in new Database, using command in 'RoleRPG/main/server/databases/postgre_db/models/player_model.sql'</li>
     <li>Open RoleRPG/main/server/.env and change the values under '#postgress db' ​​to yours</li>
     <li>(2)Next step install Redis DB</li>
-    <li>Use command "redis-cli"</li>
-    <li>Then "set messages []"</li>
     <li>(3)Open first terminal and cd to directory server</li>
     <li>Use command npm run start</li>
     <li>Open second terminal and cd to directory client</li>
