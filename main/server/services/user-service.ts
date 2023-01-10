@@ -8,7 +8,6 @@ export async function registration(username: string, email: string, password: st
     const candidate = await user_model.findOne({username: username});
     if(candidate)
         throw ApiError.badRequest('User exist');
-
     const hash = bcrypt.hashSync(password, 5);
     const user = await user_model.create({username: username, password: hash});
     const user_pdg = await addUser(user.id, username, email, hash, class_id);

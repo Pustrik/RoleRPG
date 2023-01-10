@@ -27,7 +27,7 @@ export async function handshake(socket: Socket, user: IPlayer, callback: (player
             callback(user, await getAllPlayers());
             return;
         }
-        const mes_cache: IMessage[] = JSON.parse(await redisDB.get('messages'));
+        const mesCache: IMessage[] = JSON.parse(await redisDB.get('messages'));
         user.class_id = (await getUserByUsername(user.username)).class_id;
         user.socket_id = socket.id;
         user.hp = getBasics(user.class_id);
@@ -42,7 +42,7 @@ export async function handshake(socket: Socket, user: IPlayer, callback: (player
         console.info('Sending callback');
         callback(user, players);
         sendMessage('user_connected', getSocketsButCurrent(players, socket.id), players);
-        sendMessage('update_chat', await getAllSockets(), mes_cache.slice(-10));
+        sendMessage('update_chat', await getAllSockets(), mesCache.length>10?mesCache.slice(-10):mesCache);
     } catch (err) {
         console.warn('Handshake error: ' + err);
         sendMessage('error', err);
@@ -129,7 +129,7 @@ export async function message(socket: Socket, message: IMessage) {
             await redisDB.set('messages', JSON.stringify(mesCache));
         }
         console.info('Received message: ' + message.username + ': ' + message.message);
-        sendMessage('update_chat', await getAllSockets(), mesCache.slice(-10));
+        sendMessage('update_chat', await getAllSockets(), mesCache.length>10?mesCache.slice(-10):mesCache);
     } catch (err) {
         console.warn('Action error: ' + err);
         sendMessage('error', err);
