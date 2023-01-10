@@ -14,7 +14,7 @@
     <li>Download project</li>
     <li>Install Redis and Postgre DB`s</li>
     <li>Create new User in Postgre</li>
-    <li>Create new Database under new User</li>
+    <li>Create new Database</li>
     <li>Create new Table in new Database, using command in 'RoleRPG/main/server/databases/postgre_db/models/player_model.sql'</li>
     <li>Open RoleRPG/main/server/.env and change the values under '#postgress db' ​​to yours</li>
     <li>Open first terminal and cd to directory server</li>
